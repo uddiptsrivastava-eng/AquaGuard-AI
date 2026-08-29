@@ -180,3 +180,13 @@ _Add Command Center, Network Map, and Zone Intelligence screenshots here before 
 Every dashboard observation is generated from a synthetic 30-day simulation. The interface is not connected to live sensors, does not represent a real city, and does not provide confirmed leak detection. Alerts, anomaly signals, risk scores, network health, and validation metrics are prototype aids for prioritizing human inspection.
 
 Deployment is intentionally outside Stage 3.
+
+## Stage 4: hackathon readiness
+
+The **Implementation Plan** dashboard page adds a guided five-minute demo, a practical real-world utility rollout, and a deployment-readiness summary. Supporting documents are available under `docs/`:
+
+- `DEMO_SCRIPT.md`
+- `REAL_WORLD_IMPLEMENTATION.md`
+- `DEPLOYMENT.md`
+
+The project is prepared for a public synthetic demonstration but has not been deployed. Review the deployment checklist before connecting GitHub or publishing through Streamlit Community Cloud.

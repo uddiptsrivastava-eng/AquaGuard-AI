@@ -13,7 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PROCESSED_DATA_PATH = PROJECT_ROOT / "data" / "processed_water_network.csv"
 VALIDATION_PATH = PROJECT_ROOT / "data" / "synthetic_validation.json"
 STATUS_COLORS = {"NORMAL": "#2dd4a8", "MONITOR": "#f4bf4f", "HIGH RISK": "#f16464"}
-PAGE_NAMES = ["Command Center", "City Overview", "Network Map", "Zone Intelligence", "Alerts", "Model Validation"]
+PAGE_NAMES = ["Command Center", "City Overview", "Network Map", "Zone Intelligence", "Alerts", "Model Validation", "Implementation Plan"]
 TIME_WINDOWS = {
     "Last 24 hours": timedelta(hours=24), "Last 3 days": timedelta(days=3),
     "Last 7 days": timedelta(days=7), "All available data": None,
