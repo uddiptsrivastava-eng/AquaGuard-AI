@@ -183,7 +183,7 @@ Deployment is intentionally outside Stage 3.
 
 ## Stage 4: hackathon readiness
 
-The **Implementation Plan** dashboard page adds a guided five-minute demo, a practical real-world utility rollout, and a deployment-readiness summary. Supporting documents are available under `docs/`:
+Hackathon demonstration, real-world rollout, and deployment guidance are available as supporting documents under `docs/`:
 
 - `DEMO_SCRIPT.md`
 - `REAL_WORLD_IMPLEMENTATION.md`

@@ -12,7 +12,6 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from dashboard.alerts import render_alerts  # noqa: E402
 from dashboard.command_center import render_command_center  # noqa: E402
 from dashboard.city_overview import render_city_overview  # noqa: E402
-from dashboard.implementation_plan import render_implementation_plan  # noqa: E402
 from dashboard.components import (  # noqa: E402
     PROCESSED_DATA_PATH, VALIDATION_PATH, apply_theme, load_processed_data,
     load_validation, render_sidebar_context,
@@ -46,7 +45,6 @@ page = render_sidebar_context(data)
 pages = {
     "Command Center": render_command_center,
     "City Overview": render_city_overview,
-    "Implementation Plan": render_implementation_plan,
     "Network Map": render_network_map,
     "Zone Intelligence": render_zone_intelligence,
     "Alerts": render_alerts,

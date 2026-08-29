@@ -51,11 +51,5 @@ class DashboardChecks(unittest.TestCase):
         app = self._open_page("Model Validation")
         self.assertTrue(any("Synthetic Prototype Validation" in title.value for title in app.title))
 
-    def test_implementation_plan(self) -> None:
-        app = self._open_page("Implementation Plan")
-        self.assertTrue(any("Implementation Plan" in title.value for title in app.title))
-        self.assertEqual([tab.label for tab in app.tabs], ["Guided Demo", "Real-world Rollout", "Deployment Readiness"])
-
-
 if __name__ == "__main__":
     unittest.main()

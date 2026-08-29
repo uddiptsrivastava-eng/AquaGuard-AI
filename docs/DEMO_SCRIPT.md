@@ -31,7 +31,7 @@ Open **Model Validation**. Explain precision, recall, and event detection in pla
 
 ## Real-world close (45 seconds)
 
-Open **Implementation Plan**. Propose a 5–10 DMA pilot with strategic inlet-flow sensors, pressure sensors, existing consumption data, an 8–12 week baseline period, and a 3–6 month shadow pilot. Engineers retain authority; confirmed field outcomes become the evidence for later calibration.
+Conclude by proposing a 5–10 DMA pilot with strategic inlet-flow sensors, pressure sensors, existing consumption data, an 8–12 week baseline period, and a 3–6 month shadow pilot. Engineers retain authority; confirmed field outcomes become the evidence for later calibration.
 
 ## Closing line
 
