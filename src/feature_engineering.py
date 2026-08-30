@@ -11,16 +11,17 @@ import numpy as np
 import pandas as pd
 
 
-RAW_DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "water_network.csv"
-GROUND_TRUTH_COLUMNS = ["is_synthetic_anomaly", "anomaly_type"]
+RAW_DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "real_water_network.csv"
+GROUND_TRUTH_COLUMNS = ["is_controlled_leak", "leak_event_ids"]
 
 
 def load_raw_data(path: Path = RAW_DATA_PATH) -> pd.DataFrame:
     """Load and validate the original synthetic readings."""
     data = pd.read_csv(path)
     required = {
-        "timestamp", "zone_id", "flow_m3_per_hour", "pressure_m_head",
-        "consumption_m3", *GROUND_TRUTH_COLUMNS,
+        "timestamp", "zone_id", "interval_hours", "flow_m3_per_hour", "flow_volume_m3",
+        "outflow_volume_m3", "pressure_m_head", "consumption_m3",
+        "unaccounted_water_m3", *GROUND_TRUTH_COLUMNS,
     }
     missing = required.difference(data.columns)
     if missing:
@@ -62,10 +63,11 @@ def engineer_features(data: pd.DataFrame) -> pd.DataFrame:
     if not pd.api.types.is_datetime64_any_dtype(result["timestamp"]):
         result["timestamp"] = pd.to_datetime(result["timestamp"], errors="raise")
 
-    # Flow is an hourly rate; multiplying by 0.25 makes it comparable with the
-    # consumption volume measured during each 15-minute interval.
-    result["flow_volume_m3"] = result["flow_m3_per_hour"] * 0.25
-    result["unaccounted_water_m3"] = result["flow_volume_m3"] - result["consumption_m3"]
+    # All normalized measurements represent the same one-hour interval.
+    result["flow_volume_m3"] = result["flow_m3_per_hour"] * result["interval_hours"]
+    result["unaccounted_water_m3"] = (
+        result["flow_volume_m3"] - result["outflow_volume_m3"] - result["consumption_m3"]
+    )
     result["unaccounted_water_pct"] = np.divide(
         result["unaccounted_water_m3"],
         result["flow_volume_m3"],
@@ -79,7 +81,7 @@ def engineer_features(data: pd.DataFrame) -> pd.DataFrame:
     decimal_hour = result["hour"] + result["timestamp"].dt.minute / 60.0
     result["hour_sin"] = np.sin(2 * np.pi * decimal_hour / 24.0)
     result["hour_cos"] = np.cos(2 * np.pi * decimal_hour / 24.0)
-    result["time_slot"] = result["timestamp"].dt.hour * 4 + result["timestamp"].dt.minute // 15
+    result["time_slot"] = result["timestamp"].dt.hour
 
     baseline_pairs = {
         "expected_flow": "flow_volume_m3",

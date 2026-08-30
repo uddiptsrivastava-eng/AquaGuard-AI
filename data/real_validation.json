@@ -1,0 +1,221 @@
+{
+  "title": "Public field-data controlled-test validation",
+  "dataset_type": "Real field measurements with controlled hydrant leak tests",
+  "total_hourly_observations": 719,
+  "controlled_test_hours": 14,
+  "isolation_forest_anomalies": 15,
+  "controlled_test_hours_flagged": 1,
+  "non_test_hours_flagged": 14,
+  "precision": 0.06666666666666667,
+  "recall": 0.07142857142857142,
+  "f1": 0.06896551724137931,
+  "total_controlled_leak_tests": 21,
+  "tests_detected_by_isolation_forest": 2,
+  "tests_detected_as_monitor_or_high": 16,
+  "total_high_risk_hours": 6,
+  "event_details": [
+    {
+      "leak_event_id": "TEST_01",
+      "start": "2023-09-25 12:15:00",
+      "end": "2023-09-25 12:28:00",
+      "controlled_leak_flow_m3h": 28.8,
+      "hourly_rows": 1,
+      "isolation_forest_detected": true,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_02",
+      "start": "2023-09-25 12:36:00",
+      "end": "2023-09-25 12:51:00",
+      "controlled_leak_flow_m3h": 7.2,
+      "hourly_rows": 1,
+      "isolation_forest_detected": true,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_03",
+      "start": "2023-09-25 13:04:00",
+      "end": "2023-09-25 13:36:00",
+      "controlled_leak_flow_m3h": 1.08,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_04",
+      "start": "2023-09-25 14:00:00",
+      "end": "2023-09-25 14:13:00",
+      "controlled_leak_flow_m3h": 28.8,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_05",
+      "start": "2023-09-25 14:20:00",
+      "end": "2023-09-25 14:38:00",
+      "controlled_leak_flow_m3h": 3.2,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_06",
+      "start": "2023-09-25 14:49:00",
+      "end": "2023-09-25 15:19:00",
+      "controlled_leak_flow_m3h": 0.78,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_07",
+      "start": "2023-09-25 15:51:00",
+      "end": "2023-09-25 16:01:00",
+      "controlled_leak_flow_m3h": 28.8,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": false
+    },
+    {
+      "leak_event_id": "TEST_08",
+      "start": "2023-09-25 16:13:00",
+      "end": "2023-09-25 16:28:00",
+      "controlled_leak_flow_m3h": 3.0,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": false
+    },
+    {
+      "leak_event_id": "TEST_09",
+      "start": "2023-09-25 16:41:00",
+      "end": "2023-09-25 17:11:00",
+      "controlled_leak_flow_m3h": 0.7,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_10",
+      "start": "2023-09-25 21:12:00",
+      "end": "2023-09-25 21:23:00",
+      "controlled_leak_flow_m3h": 29.2,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_11",
+      "start": "2023-09-25 21:36:00",
+      "end": "2023-09-25 21:50:00",
+      "controlled_leak_flow_m3h": 3.02,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_12",
+      "start": "2023-09-25 22:01:00",
+      "end": "2023-09-25 22:31:00",
+      "controlled_leak_flow_m3h": 0.75,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_13",
+      "start": "2023-09-25 23:02:00",
+      "end": "2023-09-25 23:11:00",
+      "controlled_leak_flow_m3h": 27.4,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_14",
+      "start": "2023-09-25 23:24:00",
+      "end": "2023-09-25 23:39:00",
+      "controlled_leak_flow_m3h": 3.1,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_15",
+      "start": "2023-09-25 23:54:00",
+      "end": "2023-09-26 00:24:00",
+      "controlled_leak_flow_m3h": 0.7,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_16",
+      "start": "2023-09-26 12:08:00",
+      "end": "2023-09-26 12:18:00",
+      "controlled_leak_flow_m3h": 28.9,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_17",
+      "start": "2023-09-26 12:32:00",
+      "end": "2023-09-26 12:47:00",
+      "controlled_leak_flow_m3h": 3.0,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_18",
+      "start": "2023-09-26 12:58:00",
+      "end": "2023-09-26 13:28:00",
+      "controlled_leak_flow_m3h": 0.72,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": true
+    },
+    {
+      "leak_event_id": "TEST_19",
+      "start": "2023-09-26 13:52:00",
+      "end": "2023-09-26 14:03:00",
+      "controlled_leak_flow_m3h": 29.5,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": false
+    },
+    {
+      "leak_event_id": "TEST_20",
+      "start": "2023-09-26 14:15:00",
+      "end": "2023-09-26 14:30:00",
+      "controlled_leak_flow_m3h": 3.0,
+      "hourly_rows": 1,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": false
+    },
+    {
+      "leak_event_id": "TEST_21",
+      "start": "2023-09-26 14:42:00",
+      "end": "2023-09-26 15:12:00",
+      "controlled_leak_flow_m3h": 0.71,
+      "hourly_rows": 2,
+      "isolation_forest_detected": false,
+      "monitor_or_high_detected": false
+    }
+  ],
+  "warning": "These results describe one public experimental DMA and controlled hydrant tests. They are not city-wide or production leak-detection accuracy.",
+  "model_features": [
+    "flow_volume_m3",
+    "outflow_volume_m3",
+    "consumption_m3",
+    "pressure_m_head",
+    "unaccounted_water_pct",
+    "flow_deviation_pct",
+    "consumption_deviation_pct",
+    "pressure_deviation_pct",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "raw_data_sha256": "835aaf1c70e1c8281c540be81f2894de8956c72c47a5eefa9ec7619b960aba75"
+}

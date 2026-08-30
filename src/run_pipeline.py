@@ -12,7 +12,7 @@ from risk_scoring import add_risk_scores
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROCESSED_DATA_PATH = PROJECT_ROOT / "data" / "processed_water_network.csv"
+PROCESSED_DATA_PATH = PROJECT_ROOT / "data" / "processed_real_water_network.csv"
 
 
 def _file_hash(path: Path) -> str:

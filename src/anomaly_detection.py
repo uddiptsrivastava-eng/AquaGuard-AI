@@ -12,6 +12,7 @@ from feature_engineering import GROUND_TRUTH_COLUMNS
 # deliberately absent: they are revealed only after predictions for evaluation.
 MODEL_FEATURES = [
     "flow_volume_m3",
+    "outflow_volume_m3",
     "consumption_m3",
     "pressure_m_head",
     "unaccounted_water_pct",

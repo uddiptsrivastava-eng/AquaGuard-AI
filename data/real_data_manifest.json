@@ -1,0 +1,11 @@
+{
+  "source": "https://doi.org/10.5281/zenodo.14001028",
+  "archive_file": "WDN Data.rar",
+  "archive_md5": "8f4440c2511a01191adac57c43503a29",
+  "publisher": "NTNU/SINTEF via the EU Open Research Repository (Zenodo)",
+  "measurement_period": "September 2023",
+  "dma_count": 1,
+  "usable_meter_sites": 15,
+  "controlled_leak_tests": 21,
+  "notes": "SWM1 excluded because the publisher documents possible sensor faults."
+}

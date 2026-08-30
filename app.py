@@ -44,9 +44,9 @@ if VALIDATION_PATH.exists():
 page = render_sidebar_context(data)
 pages = {
     "Command Center": render_command_center,
-    "City Overview": render_city_overview,
+    "Meter Sites": render_city_overview,
     "Network Map": render_network_map,
-    "Zone Intelligence": render_zone_intelligence,
+    "DMA Intelligence": render_zone_intelligence,
     "Alerts": render_alerts,
     "Model Validation": render_model_validation,
 }

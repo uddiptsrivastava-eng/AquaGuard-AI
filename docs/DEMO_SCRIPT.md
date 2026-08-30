@@ -1,50 +1,29 @@
-# AquaGuard AI — Five-Minute Hackathon Demo
+# AquaGuard AI — Real-Data Demo Script
 
-## Opening (30 seconds)
+## Opening
 
-Urban water utilities cannot place sensors on every pipe. AquaGuard AI uses strategic zone-level flow and pressure measurements plus available consumption data to identify anomalous behaviour and prioritize human inspection. It does not claim to confirm leaks.
+Explain that AquaGuard now uses a public September 2023 field dataset from one anonymized monitored DMA. It contains inlet/outlet flow, 15 usable smart-meter sites, pressure, consumption, and 21 controlled hydrant leak tests. It is not live telemetry or a city-wide deployment.
 
-## Command Center (45 seconds)
+## Command Center
 
-Open **Command Center**. Explain that every displayed value comes from the processed synthetic dataset. Click **Show high-risk example** to move from the latest calm network state to a documented abnormal period. Point out total supplied volume, total consumption, imbalance, zone status, and the transparent network-health formula.
+Use **Show highest-risk hour**. Explain inlet volume, outlet volume, metered consumption, the resulting DMA balance, median pressure, and risk category. Point out whether a documented controlled test overlaps the selected hour.
 
-## City and zone investigation (90 seconds)
+## Meter Sites
 
-Open **City Overview**. Set the inspection hour to **24 Jan 2026 · 20:00**, select the South District, then inspect **Z18**. Explain that the map is conceptual.
+Move the hourly selector and inspect individual smart-meter locations. Explain that the points are anonymized measurement sites and that their positions are conceptual rather than geographic.
 
-Open **Zone Intelligence**, select Z18, and choose the seven-day window. Compare supplied flow volume with recorded consumption; then show pressure and risk over time. Emphasize persistence and the deterministic explanation.
+## DMA Intelligence
 
-## What-if interaction (45 seconds)
+Compare inlet volume, outlet volume, and metered consumption. Then show pressure and risk history. Explain that an unexplained balance can also reflect incomplete metering, timing, storage, or measurement uncertainty.
 
-Return to Command Center and enter:
+## What-if Scenario Lab
 
-- Flow: 250 m³/h
-- Consumption: 15 m³ per 15 minutes
-- Pressure: 30 m head
-- Persistence: 8 of 8 readings
+Enter higher inlet flow, lower outlet flow, low metered consumption, lower pressure, and sustained hours. State that this is a transparent rule-based estimate and does not rerun Isolation Forest.
 
-Explain that this is a rule-based scenario estimate, not live Isolation Forest inference or a leak probability.
+## Model Validation
 
-## Validation (45 seconds)
-
-Open **Model Validation**. Explain precision, recall, and event detection in plain language. State that all six simulated events had at least one model flag, while the low precision produces unnecessary inspection candidates. These are synthetic prototype results, not real-world accuracy.
-
-## Real-world close (45 seconds)
-
-Conclude by proposing a 5–10 DMA pilot with strategic inlet-flow sensors, pressure sensors, existing consumption data, an 8–12 week baseline period, and a 3–6 month shadow pilot. Engineers retain authority; confirmed field outcomes become the evidence for later calibration.
+Explain the real results honestly: Isolation Forest directly covers only 2 of 21 short controlled tests after hourly aggregation, while the combined risk rules reach MONITOR or HIGH RISK for 16 of 21 tests. Do not present this as production accuracy.
 
 ## Closing line
 
-“AquaGuard does not replace utility engineers. It helps them decide where limited inspection resources should go first.”
-
-## Likely judge questions
-
-**Why Isolation Forest?** It can rank unusual behaviour without requiring a large labelled leak dataset.
-
-**Why is precision low?** The prototype favors finding suspicious incidents, so it generates extra inspection candidates. A field pilot is needed to calibrate that trade-off.
-
-**Does 80 mean an 80% leak probability?** No. It is an explicit prioritization score, not a calibrated probability.
-
-**How can this work without sensors everywhere?** Monitor district-metered-area inlets and strategic pressure points, then combine them with available zone consumption data.
-
-**What would you validate first?** Data quality, useful finding rate, false inspection rate, response time, sensor reliability, and estimated water saved.
+“AquaGuard does not declare a leak. It turns imperfect field measurements into an explainable inspection priority, and the real-data results show exactly where the prototype still needs finer time resolution and utility calibration.”

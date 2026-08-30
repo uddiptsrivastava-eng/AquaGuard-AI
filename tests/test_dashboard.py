@@ -20,26 +20,26 @@ class DashboardChecks(unittest.TestCase):
     def test_command_center(self) -> None:
         app = self._open_page("Command Center")
         self.assertTrue(any("AquaGuard AI" in title.value for title in app.title))
-        self.assertEqual(app.select_slider[0].label, "Network snapshot hour")
-        self.assertTrue(any("Total input flow" in item.value for item in app.markdown))
-        self.assertTrue(any("Total consumption" in item.value for item in app.markdown))
+        self.assertEqual(app.select_slider[0].label, "DMA snapshot hour")
+        self.assertTrue(any("Inlet volume" in item.value for item in app.markdown))
+        self.assertTrue(any("Metered consumption" in item.value for item in app.markdown))
         self.assertTrue(any("What-if Scenario Lab" in item.value for item in app.markdown))
-        self.assertEqual(len(app.number_input), 3)
+        self.assertEqual(len(app.number_input), 4)
 
     def test_network_map(self) -> None:
         app = self._open_page("Network Map")
-        self.assertTrue(any("Conceptual DMA Network" in title.value for title in app.title))
+        self.assertTrue(any("Conceptual DMA Sensor Network" in title.value for title in app.title))
 
     def test_city_overview(self) -> None:
-        app = self._open_page("City Overview")
-        self.assertTrue(any("City Overview" in title.value for title in app.title))
-        self.assertEqual(app.select_slider[0].label, "City inspection hour")
-        self.assertEqual(app.selectbox[0].label, "District")
+        app = self._open_page("Meter Sites")
+        self.assertTrue(any("Meter Site Overview" in title.value for title in app.title))
+        self.assertEqual(app.select_slider[0].label, "Site inspection hour")
+        self.assertEqual(app.selectbox[0].label, "Meter location")
 
     def test_zone_intelligence(self) -> None:
-        app = self._open_page("Zone Intelligence")
-        self.assertTrue(any("Zone Intelligence" in title.value for title in app.title))
-        self.assertTrue(any("Zone observation history" in item.value for item in app.markdown))
+        app = self._open_page("DMA Intelligence")
+        self.assertTrue(any("DMA Intelligence" in title.value for title in app.title))
+        self.assertTrue(any("DMA observation history" in item.value for item in app.markdown))
         self.assertIn("Date", app.dataframe[0].value.columns)
         self.assertIn("Time", app.dataframe[0].value.columns)
 
@@ -49,7 +49,7 @@ class DashboardChecks(unittest.TestCase):
 
     def test_model_validation(self) -> None:
         app = self._open_page("Model Validation")
-        self.assertTrue(any("Synthetic Prototype Validation" in title.value for title in app.title))
+        self.assertTrue(any("Controlled-Test Validation" in title.value for title in app.title))
 
 if __name__ == "__main__":
     unittest.main()

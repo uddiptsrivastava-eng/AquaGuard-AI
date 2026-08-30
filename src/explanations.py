@@ -6,15 +6,15 @@ import pandas as pd
 def _explain_row(row: pd.Series) -> str:
     reasons: list[str] = []
     if row["flow_deviation_pct"] >= 35:
-        reasons.append("Flow is substantially above the zone's historical baseline")
+        reasons.append("Inlet flow is substantially above the DMA's historical baseline")
     elif row["flow_deviation_pct"] <= -35:
-        reasons.append("Flow is substantially below the zone's historical baseline")
+        reasons.append("Inlet flow is substantially below the DMA's historical baseline")
     if row["pressure_deviation_pct"] <= -15:
-        reasons.append("Pressure is below the zone's expected range")
+        reasons.append("Median site pressure is below the DMA's expected range")
     if row["unaccounted_water_pct"] >= 30:
-        reasons.append("Supplied flow volume significantly exceeds recorded consumption")
+        reasons.append("Inlet volume significantly exceeds outlet volume plus metered consumption")
     if row["consumption_deviation_pct"] >= 35:
-        reasons.append("Consumption is substantially above the zone's historical baseline")
+        reasons.append("Metered consumption is substantially above the DMA's historical baseline")
     if row["persistence_count_8"] >= 4:
         reasons.append("The abnormal pattern has persisted across multiple recent readings")
 

@@ -10,10 +10,11 @@ import streamlit as st
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PROCESSED_DATA_PATH = PROJECT_ROOT / "data" / "processed_water_network.csv"
-VALIDATION_PATH = PROJECT_ROOT / "data" / "synthetic_validation.json"
+PROCESSED_DATA_PATH = PROJECT_ROOT / "data" / "processed_real_water_network.csv"
+VALIDATION_PATH = PROJECT_ROOT / "data" / "real_validation.json"
+METER_DATA_PATH = PROJECT_ROOT / "data" / "real_meter_sites.csv"
 STATUS_COLORS = {"NORMAL": "#2dd4a8", "MONITOR": "#f4bf4f", "HIGH RISK": "#f16464"}
-PAGE_NAMES = ["Command Center", "City Overview", "Network Map", "Zone Intelligence", "Alerts", "Model Validation"]
+PAGE_NAMES = ["Command Center", "Meter Sites", "Network Map", "DMA Intelligence", "Alerts", "Model Validation"]
 TIME_WINDOWS = {
     "Last 24 hours": timedelta(hours=24), "Last 3 days": timedelta(days=3),
     "Last 7 days": timedelta(days=7), "All available data": None,
@@ -43,6 +44,16 @@ def load_validation(path: Path) -> dict:
         return json.load(handle)
 
 
+@st.cache_data(show_spinner="Loading smart-meter observations…")
+def load_meter_data(path: Path = METER_DATA_PATH) -> pd.DataFrame:
+    data = pd.read_csv(path, parse_dates=["timestamp"])
+    required = {"timestamp", "meter_id", "pressure_bar", "pressure_m_head", "consumption_m3"}
+    missing = required.difference(data.columns)
+    if missing:
+        raise ValueError(f"meter columns are missing: {sorted(missing)}")
+    return data.sort_values(["timestamp", "meter_id"], ignore_index=True)
+
+
 def latest_by_zone(data: pd.DataFrame) -> pd.DataFrame:
     return data.sort_values("timestamp").groupby("zone_id", as_index=False).tail(1).sort_values("zone_id")
 
@@ -60,16 +71,16 @@ def render_sidebar_context(data: pd.DataFrame) -> str:
     page = st.sidebar.radio("Navigation", PAGE_NAMES, label_visibility="collapsed")
     st.sidebar.divider()
     st.sidebar.markdown("**CURRENT DATASET**")
-    st.sidebar.caption("Synthetic 30-day urban network simulation")
+    st.sidebar.caption("Public September 2023 field measurements")
     left, right = st.sidebar.columns(2)
-    left.metric("Zones", f"{data['zone_id'].nunique():,}")
+    left.metric("DMAs", f"{data['zone_id'].nunique():,}")
     right.metric("Observations", f"{len(data):,}")
     st.sidebar.divider()
     st.sidebar.caption("AI ENGINE")
     st.sidebar.markdown("**Isolation Forest**")
     st.sidebar.caption("RISK ENGINE")
     st.sidebar.markdown("**AquaGuard Prototype Score**")
-    st.sidebar.info("Prototype · Synthetic Data", icon="ℹ️")
+    st.sidebar.info("Prototype · Public Field Data", icon="ℹ️")
     return page
 
 

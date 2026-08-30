@@ -48,6 +48,12 @@ class PipelineChecks(unittest.TestCase):
     def test_every_row_has_an_explanation(self) -> None:
         self.assertFalse(self.processed["explanation"].isna().any())
 
+    def test_real_dataset_shape_and_source_labels(self) -> None:
+        self.assertEqual(len(self.processed), 719)
+        self.assertEqual(self.processed["zone_id"].nunique(), 1)
+        self.assertEqual(int(self.processed["is_controlled_leak"].sum()), 14)
+        self.assertEqual(self.report["total_controlled_leak_tests"], 21)
+
 
 if __name__ == "__main__":
     unittest.main()

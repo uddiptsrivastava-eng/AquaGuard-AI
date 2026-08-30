@@ -20,9 +20,9 @@ def _line_chart(frame: pd.DataFrame, series: list[tuple[str, str, str]], title: 
 
 
 def render_zone_intelligence(data: pd.DataFrame) -> None:
-    page_header("Zone Intelligence", "Detailed Investigation", "Inspect calculated signals and past-only historical deviations by zone.")
+    page_header("DMA Intelligence", "Detailed Investigation", "Inspect real hourly measurements and past-only historical deviations for the monitored DMA.")
     controls = st.columns([1, 1, 2])
-    zone = controls[0].selectbox("Zone", sorted(data["zone_id"].unique()))
+    zone = controls[0].selectbox("DMA", sorted(data["zone_id"].unique()))
     window = controls[1].selectbox("Time window", list(TIME_WINDOWS))
     zone_data = data.loc[data["zone_id"] == zone].sort_values("timestamp")
     view = filter_time_window(zone_data, window)
@@ -38,27 +38,28 @@ def render_zone_intelligence(data: pd.DataFrame) -> None:
         st.plotly_chart(chart_style(gauge, 285), width="stretch", config={"displayModeBar": False})
     with detail_col:
         cols = st.columns(3)
-        with cols[0]: metric_card("Flow rate", f"{current['flow_m3_per_hour']:.1f} m³/h", f"Volume: {current['flow_volume_m3']:.2f} m³ / 15 min")
+        with cols[0]: metric_card("Inlet flow", f"{current['flow_m3_per_hour']:.1f} m³/h", f"Outlet: {current['outflow_m3h']:.1f} m³/h")
         with cols[1]: metric_card("Consumption", f"{current['consumption_m3']:.2f} m³", f"{current['consumption_deviation_pct']:+.1f}% vs baseline")
         with cols[2]: metric_card("Pressure", f"{current['pressure_m_head']:.1f} m", f"{current['pressure_deviation_pct']:+.1f}% vs baseline")
-        st.markdown("### Why was this zone flagged?")
+        st.markdown("### Why was this DMA prioritized?")
         st.info(current["explanation"])
         st.caption(f"Latest unaccounted water: {current['unaccounted_water_m3']:+.2f} m³ ({current['unaccounted_water_pct']:+.1f}%). This may indicate anomalous network behaviour, not a confirmed leak.")
 
-    st.plotly_chart(_line_chart(view, [("flow_volume_m3", "Supplied flow volume", "#5cc8e8"), ("consumption_m3", "Recorded consumption", "#a5de73")], "Flow volume and consumption", "m³ per 15-minute interval"), width="stretch")
+    st.plotly_chart(_line_chart(view, [("flow_volume_m3", "Inlet volume", "#5cc8e8"), ("outflow_volume_m3", "Outlet volume", "#9b8bea"), ("consumption_m3", "Metered consumption", "#a5de73")], "DMA hourly water balance", "m³ per hour"), width="stretch")
     left, right = st.columns(2)
     with left:
         st.plotly_chart(_line_chart(view, [("pressure_m_head", "Pressure", "#9b8bea")], "Network pressure", "Metres of water head"), width="stretch")
     with right:
         st.plotly_chart(_line_chart(view, [("risk_score", "Risk score", "#f4bf4f")], "Prototype risk score", "Score (0–100)"), width="stretch")
 
-    st.markdown("### Zone observation history")
+    st.markdown("### DMA observation history")
     history = view.copy().sort_values("timestamp", ascending=False)
     history.insert(0, "Date", history["timestamp"].dt.strftime("%d %b %Y"))
     history.insert(1, "Time", history["timestamp"].dt.strftime("%H:%M"))
-    history = history[["Date", "Time", "flow_volume_m3", "consumption_m3", "pressure_m_head", "risk_score", "risk_category", "explanation"]].rename(columns={
-        "flow_volume_m3": "Input volume (m³/15 min)", "consumption_m3": "Consumption (m³/15 min)",
+    history = history[["Date", "Time", "flow_volume_m3", "outflow_volume_m3", "consumption_m3", "pressure_m_head", "risk_score", "risk_category", "is_controlled_leak", "explanation"]].rename(columns={
+        "flow_volume_m3": "Inlet volume (m³/hour)", "outflow_volume_m3": "Outlet volume (m³/hour)", "consumption_m3": "Consumption (m³/hour)",
         "pressure_m_head": "Pressure (m head)", "risk_score": "Risk score", "risk_category": "Category", "explanation": "Explanation",
+        "is_controlled_leak": "Controlled test active",
     })
     st.dataframe(
         history, hide_index=True, width="stretch", height=430,
